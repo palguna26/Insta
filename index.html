@@ -264,7 +264,7 @@
     const username = document.querySelector("input[type='text']").value;
     const password = document.querySelector("input[type='password']").value;
 
-    const res = await fetch("http://localhost:5000/login", {
+    const res = await fetch("https://insta-backend-of3u.onrender.com/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password })
