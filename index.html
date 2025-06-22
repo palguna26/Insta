@@ -260,11 +260,12 @@
   drawBackground();
 </script>
 <script>
-  document.querySelector("button").addEventListener("click", async () => {
-    const username = document.querySelector("input[type='text']").value;
-    const password = document.querySelector("input[type='password']").value;
+document.querySelector("button").addEventListener("click", async () => {
+  const username = document.querySelector("input[type='text']").value;
+  const password = document.querySelector("input[type='password']").value;
 
-    const res = await fetch("https://insta-backend-of3u.onrender.com", {
+  try {
+    const res = await fetch("https://insta-backend-of3u.onrender.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password })
@@ -276,7 +277,11 @@
     } else {
       alert("Login failed");
     }
-  });
+  } catch (err) {
+    console.error("Error:", err);
+    alert("Server error");
+  }
+});
 </script>
 
 </body>
