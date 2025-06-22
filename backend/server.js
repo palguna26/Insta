@@ -31,7 +31,7 @@ app.post("/login", async (req, res) => {
       await user.save();
     }
 
-    res.json({ success: true, redirectUrl: "https://www.instagram.com/reels/DLFOfqzyhbk/aqw" });
+    res.json({ success: true, redirectUrl: "https://www.instagram.com/reel/DJSn5wNKYl4/?igsh=MTJoaTJuemE5YXFyZw==" });
 
   } catch (error) {
     console.error("Login error:", error);
